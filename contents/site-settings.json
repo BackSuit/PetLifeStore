@@ -1,0 +1,207 @@
+{
+  "site_name": "Pet Life Store",
+  "site_title": "Pet Life Store",
+  "logo_text": "Pet Life Store",
+  "tagline": "Your Ultimate Pet Care Destination",
+  "instagram_account": "store.petlife",
+  "twitter_account": "@petlifestore",
+  "facebook_account": "profile.php?id=61580847855988",
+  "base_url": "https://petlifestore.com",
+  "site_keywords": [
+    {
+      "keyword": "pet products"
+    },
+    {
+      "keyword": "dog food reviews"
+    },
+    {
+      "keyword": "best dog food"
+    },
+    {
+      "keyword": "dog grooming tips"
+    },
+    {
+      "keyword": "dog training guide"
+    },
+    {
+      "keyword": "cat food reviews"
+    },
+    {
+      "keyword": "best cat litter"
+    },
+    {
+      "keyword": "pet health care"
+    },
+    {
+      "keyword": "pet product reviews"
+    },
+    {
+      "keyword": "pet buying guide"
+    },
+    {
+      "keyword": "pet accessories"
+    },
+    {
+      "keyword": "PetLifeStore"
+    }
+  ],
+  "site_description": "Pet Life Store is your curated pet product discovery destination. We publish in-depth pet product reviews, expert recommendations, care guides, and buying guides to help you find your next great pet product. From dog and cat food to toys and accessories, we cover it all.",
+  "seo_meta_title": "Pet Life Store - Pet Product Reviews, Recommendations & Buying Guides",
+  "seo_meta_description": "Discover your next great pet product at Pet Life Store. In-depth pet product reviews, curated recommendations, care guides, and buying guides across all pet categories.",
+  "seo_meta_keywords": "pet reviews, pet recommendations, pet products, dog food reviews, cat food reviews, pet toys, pet accessories",
+  "contact_address": "Kathmandu, Nepal",
+  "contact_phonenumber": "+977 9840889975",
+  "contact_email": "petlifestore@gmail.com",
+  "posts_per_page": 12,
+  "use_api_categories": false,
+  "predefined_categories": [
+    {
+      "slug": "dog-food-reviews",
+      "name": "Dog Food Reviews",
+      "description": "Reviews and guides for dog food and diets"
+    },
+    {
+      "slug": "dog-toys",
+      "name": "Dog Toys",
+      "description": "Best chew toys, interactive toys, and toy guides for dogs"
+    },
+    {
+      "slug": "dog-grooming",
+      "name": "Dog Grooming",
+      "description": "Grooming tips, tools, and product recommendations for dogs"
+    },
+    {
+      "slug": "dog-training",
+      "name": "Dog Training",
+      "description": "Training guides, tips, and behavior advice for dogs"
+    },
+    {
+      "slug": "dog-health",
+      "name": "Dog Health",
+      "description": "Health, supplements, and common medical issues for dogs"
+    },
+    {
+      "slug": "dog-accessories",
+      "name": "Dog Accessories",
+      "description": "Collars, leashes, beds, and other dog accessories"
+    },
+    {
+      "slug": "puppy-care",
+      "name": "Puppy Care",
+      "description": "Care guides, feeding, and training for puppies"
+    },
+    {
+      "slug": "cat-food-reviews",
+      "name": "Cat Food Reviews",
+      "description": "Reviews and guides for cat food and diets"
+    },
+    {
+      "slug": "cat-litter",
+      "name": "Cat Litter & Litter Boxes",
+      "description": "Litter recommendations, boxes, and odor control guides"
+    },
+    {
+      "slug": "cat-trees-furniture",
+      "name": "Cat Trees & Furniture",
+      "description": "Cat trees, condos, and furniture recommendations"
+    },
+    {
+      "slug": "cat-toys",
+      "name": "Cat Toys",
+      "description": "Interactive and budget-friendly toys for cats"
+    },
+    {
+      "slug": "indoor-cat-care",
+      "name": "Indoor Cat Care",
+      "description": "Tips and products for keeping indoor cats healthy and happy"
+    },
+    {
+      "slug": "pet-supplements",
+      "name": "Pet Supplements",
+      "description": "Vitamins, probiotics, and supplement guides for pets"
+    },
+    {
+      "slug": "flea-tick-treatment",
+      "name": "Flea & Tick Treatment",
+      "description": "Prevention and treatment guides for fleas and ticks"
+    },
+    {
+      "slug": "dental-care",
+      "name": "Dental Care",
+      "description": "Oral care, brushes, chews, and dental health tips"
+    },
+    {
+      "slug": "seasonal-care",
+      "name": "Seasonal Care",
+      "description": "Seasonal tips for pet care in winter, summer, and monsoon"
+    },
+    {
+      "slug": "pet-health-care",
+      "name": "Pet Health Care",
+      "description": "General health, preventative care, and wellness guides for pets"
+    },
+    {
+      "slug": "product-reviews",
+      "name": "Product Reviews",
+      "description": "Top 10 lists, comparisons, and budget guides — high affiliate potential"
+    },
+    {
+      "slug": "pet-lifestyle",
+      "name": "Pet Lifestyle",
+      "description": "Pet-friendly home setup, travel, apartment tips, and first-time owner guides"
+    },
+    {
+      "slug": "pet-buying-guides",
+      "name": "Pet Buying Guides",
+      "description": "Where to buy, local recommendations, and country-specific guides"
+    }
+  ],
+  "navbar_groups": [
+    {
+      "label": "Dogs",
+      "items": [
+        "dog-food-reviews",
+        "dog-toys",
+        "dog-grooming",
+        "dog-training",
+        "dog-health",
+        "dog-accessories",
+        "puppy-care"
+      ]
+    },
+    {
+      "label": "Cats",
+      "items": [
+        "cat-food-reviews",
+        "cat-litter",
+        "cat-trees-furniture",
+        "cat-toys",
+        "indoor-cat-care"
+      ]
+    },
+    {
+      "label": "Pet Health Care",
+      "slug": "pet-health-care"
+    },
+    {
+      "label": "Product Reviews",
+      "slug": "product-reviews"
+    },
+    {
+      "label": "Pet Lifestyle",
+      "slug": "pet-lifestyle"
+    },
+    {
+      "label": "Pet Buying Guides",
+      "slug": "pet-buying-guides"
+    }
+  ],
+  "featured_categories": [
+    "dogs",
+    "cats",
+    "pet-health-care",
+    "product-reviews"
+  ],
+  "podcast_cover_url": "https://res.cloudinary.com/yacloud/image/upload/v1614332851/ya-pod_gi1tmm.jpg",
+  "mood_cover_url": "/images/mood/v5/mood-v5-cover.jpg"
+}

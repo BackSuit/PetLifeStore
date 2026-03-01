@@ -1,0 +1,37 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": false,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "react",
+    "baseUrl": ".",
+    "paths": {
+      "@/public/*": ["public/*"],
+      "@/contents/*": ["contents/*"],
+      "@/styles/*": ["styles/*"],
+      "@/assets/*": ["src/assets/*"],
+      "@/config/*": ["src/config/*"],
+      "@/constants/*": ["src/constants/*"],
+      "@/components/*": ["src/components/*"],
+      "@/context/*": ["src/context/*"],
+      "@/context": ["src/context/index.js"],
+      "@/libs/*": ["src/libs/*"],
+      "@/utils/*": ["src/utils/*"],
+      "@/models/*": ["src/models/*"],
+      "@/hooks/*": ["src/hooks/*"],
+      "@/module/*": ["src/module/*"]
+    },
+    "incremental": true
+  },
+  "include": ["src/**/*.js"],
+  "exclude": ["node_modules"]
+}

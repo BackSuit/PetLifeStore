@@ -1,0 +1,180 @@
+import Image from "next/image"
+import {
+  AspectRatio,
+  Box,
+  Heading,
+  HStack,
+  Text,
+  Tooltip,
+  useBreakpointValue,
+  VStack,
+  Skeleton,
+  Flex,
+  Link,
+} from "@chakra-ui/react"
+import BoringAvatar from "boring-avatars"
+import RenderInView from "@/components/RenderInView"
+
+function Social({ platform }) {
+  switch (platform.trim().toLowerCase()) {
+    case "instagram":
+      return "IG"
+    case "twitter":
+      return "TW"
+    case "facebook":
+      return "FB"
+    case "linkedin":
+      return "LI"
+    case "mail":
+      return "EM"
+    default:
+      return platform.substring(0, 2).toUpperCase()
+  }
+}
+
+export const Person = ({ person, showSocmed }) => {
+  const nameSize = useBreakpointValue({ base: "sm", md: "md", xl: "lg" })
+  const roleTitleSize = useBreakpointValue({ base: "sm", lg: "md" })
+
+  const socialHref = (platform, identifier, directUrl) => {
+    if (!platform || !identifier) return "#"
+    // Use direct URL if provided
+    if (directUrl) {
+      return `/redirect?url=${directUrl}`
+    }
+    const url = convertToUrl(platform, identifier) || false
+    return `/redirect?url=${url}`
+  }
+
+  const convertToUrl = (platform, identifier) => {
+    // If identifier looks like a full URL, return it directly
+    if (identifier && identifier.startsWith("http")) {
+      return identifier
+    }
+
+    switch (platform.trim().toLowerCase()) {
+      case "instagram":
+        return `https://instagram.com/${identifier.replace("@", "")}`
+      case "facebook":
+        return `https://www.facebook.com/search/top?q=${identifier
+          .split(" ")
+          .join("%20")}`
+      case "twitter":
+        return `https://twitter.com/${identifier.replace("@", "")}`
+      case "linkedin":
+        return `https://linkedin.com/in/${identifier}`
+      case "mail":
+        return `mailto:${identifier}`
+      default:
+        return `#`
+    }
+  }
+
+  return (
+    <RenderInView>
+      {({ ref, inView, setIsLoaded }) => (
+        <VStack
+          alignItems="flex-start"
+          ref={ref}
+          py={2}
+          spacing={4}
+          borderBottom="1px solid"
+          borderColor="gray.400"
+          height="full"
+        >
+          {person && person.photo && inView && (
+            <AspectRatio
+              w="full"
+              filter="grayscale(50%)"
+              ratio={2 / 2}
+              boxShadow="xs"
+              overflow="hidden"
+            >
+              <Skeleton width="full" height="full" isLoaded={inView}>
+                <Image
+                  fill
+                  style={{ objectFit: "cover" }}
+                  src={person?.photo}
+                  alt={`${person?.name} from ${person?.role}`}
+                  quality={30}
+                  onLoad={setIsLoaded}
+                />
+              </Skeleton>
+            </AspectRatio>
+          )}
+          {!person.photo && (
+            <Box borderRadius={false}>
+              <BoringAvatar
+                size="100%"
+                name={person.name}
+                variant="marble"
+                square={true}
+                colors={["#CCCCCC", "#999999", "#666666", "#333333", "#000000"]}
+              />
+            </Box>
+          )}
+          <Flex
+            flexDir="column"
+            w="full"
+            pt={2}
+            borderTop="1px solid"
+            borderColor="gray.400"
+            textAlign="center"
+            spacing={1}
+            flexGrow={1}
+          >
+            <Heading fontWeight="bold" as="h3" size={nameSize} mx="auto">
+              {person?.name}
+            </Heading>
+
+            <Text
+              fontSize={roleTitleSize}
+              textAlign="center"
+              color="brand.gray"
+              mt={1}
+            >
+              {person?.role}
+            </Text>
+
+            {showSocmed && person.social_media.length > 0 && (
+              <HStack justify="center" w="full" mt="auto">
+                {person?.social_media.map(({ platform, identifier, url }) => {
+                  let href = socialHref(platform, identifier, url)
+                  return (
+                    <Tooltip
+                      label={
+                        platform.trim().toLowerCase() === "instagram" ||
+                        platform.trim().toLowerCase() === "twitter"
+                          ? identifier.startsWith("@")
+                            ? identifier
+                            : `@${identifier}`
+                          : identifier
+                      }
+                      aria-label={`${platform} Icon`}
+                      key={`${platform}-${identifier}`}
+                      hasArrow
+                    >
+                      <Link
+                        href={href}
+                        cursor="pointer"
+                        textDecor="none"
+                        px={1}
+                        _hover={{
+                          bgColor: "gray.200",
+                        }}
+                      >
+                        <Social w="1.125rem" h="1.125rem" platform={platform} />
+                      </Link>
+                    </Tooltip>
+                  )
+                })}
+              </HStack>
+            )}
+          </Flex>
+        </VStack>
+      )}
+    </RenderInView>
+  )
+}
+
+export default Person
