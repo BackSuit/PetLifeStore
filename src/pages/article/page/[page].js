@@ -44,10 +44,13 @@ export async function getStaticProps({ params }) {
 export async function getStaticPaths() {
   const postsPerPage = config.posts_per_page || 9
   const count = await countArticles()
-  const pages = Math.ceil(count / postsPerPage)
-  const paths = Array.from(Array(pages - 1).keys()).map(it => ({
-    params: { page: (it + 2).toString() },
-  }))
+  const pages = Math.max(1, Math.ceil(count / postsPerPage))
+  const paths =
+    pages > 1
+      ? Array.from(Array(pages - 1).keys()).map(it => ({
+          params: { page: (it + 2).toString() },
+        }))
+      : []
   return {
     paths: paths,
     fallback: false,
