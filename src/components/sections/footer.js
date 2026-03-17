@@ -172,8 +172,19 @@ export default function Footer() {
   const toast = useToast()
   const toastRef = useRef()
   const siteName = config.site_name || config.site_title
+  // Extract domain (hostname) from configured base_url
+  const extractDomain = url => {
+    if (!url) return ""
+    try {
+      return new URL(url).hostname
+    } catch (e) {
+      return url.replace(/^https?:\/\//, "").split("/")[0]
+    }
+  }
+  const domainToCheck = extractDomain(config.base_url)
   // Ensure deterministic categories for SSR hydration: use predefined categories
   // when global context has no categories yet (initial server/client render).
+  const tagline = config.tagline || ""
   const displayCategories =
     categories && categories.length > 0
       ? categories
@@ -276,7 +287,7 @@ export default function Footer() {
         >
           <Logo size="lg" />
           <Text fontSize="sm" color="gray.600" maxW="280px" lineHeight="1.6">
-            Your Ultimate Pet Care Destination
+            {tagline}
           </Text>
           <Box
             borderLeft="4px solid"
@@ -295,7 +306,9 @@ export default function Footer() {
             </Text>
             <VStack align="flex-start" spacing={2} fontSize="sm">
               <ChakraLink
-                href="https://www.godaddy.com/en-in/domainsearch/find?domainToCheck=petlifestore"
+                href={`https://www.godaddy.com/en-in/domainsearch/find?domainToCheck=${
+                  domainToCheck || siteName
+                }`}
                 isExternal
                 rel="noopener"
                 color="brand.primary"
