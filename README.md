@@ -1,442 +1,157 @@
-# Pretty Long — Self-help & Wellness Articles for Women
+# Pet Life Store
 
-Pretty Long is a focused article and blog frontend built with Next.js. It targets self-help, wellness and lifestyle topics for women, providing curated articles and resources organized by predefined categories (see `contents/site-settings.json`). The frontend integrates with the Backsuit backend service (https://backsuit.com) for content, comments and user management; the backend handles persistence and storage, so no database setup is required in this repository.
+Pet Life Store — Your Ultimate Pet Care Destination.
 
-## 🌟 Features
+Pet Life Store is a curated pet product discovery site publishing in-depth product reviews, buying guides, care articles and recommendations for dog and cat owners. Configuration is driven by `contents/site-settings.json`.
 
-- Focused on self-help, wellness and lifestyle content for women
-- Integrates with the Backsuit backend service (https://backsuit.com) for content, comments and auth
-- SEO-friendly: dynamic `sitemap.xml`, `robots.txt`, and meta tags
-- PWA support and responsive, mobile-first UI
-- Category system: use backend categories or predefined categories in `contents/site-settings.json`
-- Gallery and article listing with social sharing and reading-time indicators
-- Client-side and server-side rendering patterns where appropriate
-- Auto-generated site icons via the included script
+## Features
+
+- Curated pet product reviews and buying guides
+- Predefined categories (dogs, cats, health, reviews, lifestyle)
+- SEO-friendly dynamic `sitemap.xml`, `robots.txt`, and meta tags
+- PWA support and automatic icon generation
+- Uses `contents/site-settings.json` for site title, description, categories and contact info
 
 ---
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
 
 - Node.js 14+ and npm/yarn
-- Backend API service: this frontend expects a REST API — this project is integrated with Backsuit (https://backsuit.com). The backend handles data persistence, comments, users and all storage; no database setup is required in this repository.
 
 ### Installation
 
-1. **Clone the repository**
+1. Clone the repository
 
-   ```bash
-   git clone https://github.com/bi-kash/PrettyLong.git
-   cd PrettyLong
-   ```
+```bash
+git clone https://github.com/BackSuit/PetLifeStore.git
+cd PetLifeStore
+```
 
-2. **Install dependencies**
+2. Install dependencies
 
-   ```bash
-   npm install
-   # or
-   yarn install
-   ```
+```bash
+npm install
+# or
+yarn install
+```
 
-3. **Configure your site** (see [Configuration](#-configuration))
+3. Configure the site
 
-   Edit `contents/site-settings.json` with your site information.
+Edit `contents/site-settings.json` (site name, description, base URL, categories, contact info).
 
-4. **Set up environment variables**
-
-   Create a `.env.local` file and configure the backend URL and tenant settings. Example:
-
-   ```env
-   NEXT_PUBLIC_API_URL=https://api.backsuit.com
-   NEXT_PUBLIC_TENANT_ID=your_tenant_id
-   NEXT_PUBLIC_CLIENT_URL=https://prettylong.com
-
-   # NextAuth (if used)
-   NEXTAUTH_URL=https://prettylong.com
-   NEXTAUTH_SECRET=your_secret_key
-   ```
-
-5. **Generate icons**
-
-   ```bash
-   npm run generate-icons
-   ```
-
-6. **Run the development server**
-
-   ```bash
-   npm run dev
-   ```
-
-7. **Open your browser**
-
-   Visit [http://localhost:3000](http://localhost:3000)
-
----
-
-## ⚙️ Configuration
-
-The primary configuration file is `contents/site-settings.json`. It contains the site title, logo text, base URL, description and category settings. This repository supports two category modes:
-
-- `use_api_categories: true` — fetch categories from the backend
-- `use_api_categories: false` — use `predefined_categories` defined inside `site-settings.json`
-
-Edit `contents/site-settings.json` to update site name, description and categories.
-
-### What This Controls
-
-- **Logo Display** - Logo component reads from `logo_text`
-- **SEO Meta Tags** - Site name, title, and description
-- **Sitemap.xml** - Uses `base_url` for all URLs
-- **Robots.txt** - Uses `base_url` for sitemap reference
-- **Manifest.json** - PWA name and description
-- **Icons** - Generated from `site_name`
-- **Categories** - API vs predefined categories setting
-
-### Changing Site Name
-
-1. Edit `site_name` in `contents/site-settings.json`
-2. Run `npm run generate-icons` to regenerate favicons
-3. Done! Logo, manifest, and all references update automatically
-
----
-
-## 🎨 Dynamic Icon Generation
-
-Icons are automatically generated based on your site name, styled exactly like your logo.
-
-### Generate Icons
+4. Generate icons
 
 ```bash
 npm run generate-icons
 ```
 
-This creates:
-
-- `favicon.ico` (32×32) - Browser tab icon
-- `apple-touch-icon.png` (180×180) - iOS home screen
-- `logo-512.png` (512×512) - Large PWA icon
-- `maskable_icon_x192.png` (192×192) - Android PWA
-- `maskable_icon_x512.png` (512×512) - Android PWA large
-
-### How It Works
-
-The script reads your `site_name` from `site-settings.json`, splits it on the first space, and creates icons with:
-
-- White background
-- Black text
-- Top line: italic, medium weight
-- Bottom line: bold, extra weight
-- Proportional spacing (same as Logo.js component)
-
-Example: "Pretty Long" → Shows "Pretty" (italic) on top, "Long" (bold) below
-
----
-
-## 📄 Dynamic Files
-
-### Sitemap.xml - `/sitemap.xml`
-
-**Automatically generated** XML sitemap for SEO.
-
-**What it includes:**
-
-- All static pages (home, about, gallery, etc.)
-- All published articles from API
-- All categories (from API or predefined)
-- Current timestamps
-- Proper priority and changefreq values
-
-**How it works:**
-
-1. Reads `base_url` from site-settings.json
-2. Fetches all published articles via API
-3. Fetches categories (API or predefined based on `use_api_categories`)
-4. Generates XML with correct structure
-5. Caches for 1 hour
-
-**Access:** `https://yoursite.com/sitemap.xml`
-
-### Robots.txt - `/robots.txt`
-
-**Automatically generated** robots.txt for search engines.
-
-**What it includes:**
-
-- Allow all crawlers
-- Sitemap URL (using `base_url`)
-- Host directive
-
-**Access:** `https://yoursite.com/robots.txt`
-
-### Manifest.json - `/manifest.json`
-
-**Automatically generated** PWA manifest.
-
-**What it includes:**
-
-- Site name and short name
-- Site description
-- Icon references
-- Display mode and theme colors
-
-**Access:** `https://yoursite.com/manifest.json`
-
----
-
-## 🔗 Backend Service
-
-This frontend integrates with a backend REST API that provides content, comments, authors and user features. In this project we use Backsuit (https://backsuit.com) as the backend service. The backend handles all data storage and persistence — there is no database configuration in this repository.
-
-Refer to `API_DOCUMENTATION.md` for the exact endpoints expected by the frontend. If you host your own backend, ensure `NEXT_PUBLIC_API_URL` points to your API base URL.
-
----
-
-## 📁 Project Structure
-
-```
-PrettyLong/
-├── contents/                 # Content configuration
-│   ├── site-settings.json   # Main site configuration
-│   ├── bulletins.json       # Bulletin archive data
-│   ├── magazines.json       # Magazine archive data
-│   └── teams.json          # Team member data
-├── public/                  # Static assets
-│   ├── meta/               # Favicons and PWA icons
-│   ├── images/             # Site images
-│   ├── sitemap.xml         # (old static - now dynamic)
-│   ├── robots.txt          # (old static - now dynamic)
-│   └── manifest.json       # (old static - now dynamic)
-├── src/
-│   ├── components/         # React components
-│   │   ├── article/       # Article-related components
-│   │   ├── auth/          # Authentication components
-│   │   ├── comment/       # Comment system
-│   │   ├── home/          # Homepage sections
-│   │   ├── layout/        # Layout components
-│   │   ├── magazine/      # Magazine components
-│   │   ├── sections/      # Header, footer, logo
-│   │   └── team/          # Team components
-│   ├── libs/              # Utility libraries
-│   │   ├── api.js         # API functions
-│   │   ├── comments.js    # Comment helpers
-│   │   ├── date.js        # Date formatting
-│   │   └── markdownToHTML.js
-│   ├── models/            # Local model helpers (frontend-only)
-│   │   ├── Comment.js
-│   │   ├── Post.js
-│   │   └── User.js
-│   ├── pages/             # Next.js pages
-│   │   ├── api/          # API routes
-│   │   ├── auth/         # Auth pages
-│   │   ├── category/     # Category pages
-│   │   ├── read/         # Article pages
-│   │   ├── sitemap.xml.js  # Dynamic sitemap
-│   │   ├── robots.txt.js   # Dynamic robots.txt
-│   │   ├── manifest.json.js # Dynamic manifest
-│   │   └── index.js      # Homepage
-│   ├── theme/            # Chakra UI theme
-│   └── utils/            # Utilities
-├── scripts/              # Build scripts
-│   ├── generate-icons.js # Icon generation script
-│   └── test-icon-generation.js
-├── package.json
-└── next.config.js
-```
-
----
-
-## 🛠️ Available Scripts
+5. Run the development server
 
 ```bash
-# Development
-npm run dev              # Start development server
-npm run build            # Build for production
-npm run start            # Start production server
+npm run dev
+```
 
-# Icon Generation
-npm run generate-icons   # Generate all favicons and PWA icons
+Open http://localhost:3000
 
-# Code Quality
-npm run format           # Format code with Prettier
-npm run lint             # Run ESLint
-npm run check-all        # Check formatting and linting
+---
 
-# Export
-npm run export           # Build and export as static site
+## Configuration
+
+Primary config: `contents/site-settings.json`.
+
+What it controls:
+
+- Site name, title and description
+- `base_url` used in sitemaps and robots
+- Predefined categories and navbar groups
+- Contact info and social handles (displayed only if present)
+
+### Backend & Data
+
+This frontend uses Backsuit (https://backsuit.com) as the primary backend API provider. The backend handles data storage and all database responsibilities.
+
+### Security: Tenant / API keys
+
+The tenant identifier / API key is a secret value and should NOT be exposed in client-side public environment variables. Store it server-side (e.g., `BACKEND_TENANT_ID` or similar) and never commit it to the repo or place it under `NEXT_PUBLIC_*`.
+
+### Contact & Social
+
+Contact details are taken from `contents/site-settings.json` and shown here only when provided.
+
+- Address: Nepal, Kathmandu
+- WhatsApp: +977 9840889975
+- Email: bkash.timsina@gmail.com
+
+If a social field is empty in `site-settings.json`, it will be omitted from the site output.
+
+---
+
+## Scripts
+
+```bash
+npm run dev            # Start development server
+npm run build          # Build for production
+npm run start          # Start production server
+npm run generate-icons # Generate favicons and PWA icons
 ```
 
 ---
 
-## 🔧 Advanced Configuration
+## Notes
 
-### Category Management
+- Update `contents/site-settings.json` to change site text, categories or contact info.
+- The README was updated to reflect `contents/site-settings.json` values and to remove outdated "Pretty Long" references.
 
-**Option 1: API Categories** (Recommended)
-
-Set in `site-settings.json`:
-
-```json
-{
-  "use_api_categories": true
-}
-```
-
-Categories are fetched from backend API: `GET /api/v1/categories`
-
-**Option 2: Predefined Categories**
-
-Set in `site-settings.json`:
-
-```json
-{
-  "use_api_categories": false,
-  "predefined_categories": [
-    {
-      "id": 1,
-      "name": "Beauty",
-      "slug": "beauty"
-    },
-    {
-      "id": 2,
-      "name": "Hair",
-      "slug": "hair"
-    }
-  ]
-}
-```
-
-### Article Management
-
-Articles are managed through the backend API. The frontend automatically fetches and displays:
-
-- Featured articles (homepage)
-- Latest articles
-- Category-filtered articles
-- Individual article pages
-- Author profiles with their articles
-
-### Comment System
-
-Comments are stored in MongoDB and managed through the local Next.js API:
-
-- `/api/post/[slug]/comments` - Get/Post comments
-- `/api/user/profile` - User profiles for comments
-
-### Authentication
-
-Uses Next-Auth for authentication:
-
-- Google OAuth (configure in `.env.local`)
-- Email/Password (custom provider)
-- Session management
+- Database: handled by Backsuit backend (no MongoDB required here).
+- Support & Services: This project uses Backsuit (https://backsuit.com) as the main API provider — visit and register at Backsuit for a free account and API access.
+- Tenant/API keys: keep them server-side; do not expose via `NEXT_PUBLIC_*` env vars.
 
 ---
 
-## 🎯 Customization
+If you'd like I can also update other docs (API_DOCUMENTATION.md) or remove any stale references elsewhere.
 
-### Changing Colors
+### Deploying to Vercel
 
-Edit `src/theme/index.js` to customize Chakra UI theme colors.
+This project includes `vercel.json` and a small `vercel-build.sh` script, so it can be imported
+directly into Vercel with no additional configuration.
 
-### Changing Fonts
+Quick steps:
 
-Fonts are loaded from `@fontsource` in `src/pages/_app.js`:
+- Fork this repository on GitHub
+- Open your Vercel dashboard and click **Add New > Project**
+- Choose the forked repo and click **Import**
+- After import, open **Project Settings > Environment Variables** and add the required variables
+  (`NEXT_PUBLIC_API_URL`, `TENANT_ID`, `NEXT_AUTH_SECRET`) one-by-one or import your `.env`
+  file directly
+- Deploy — the default build and start commands are used (`npm run build`, `npm run start`)
 
-- Montserrat (headings)
-- Karla (body)
-- Lora (serif)
-
-### Adding New Pages
-
-1. Create file in `src/pages/`
-2. Add to sitemap in `src/pages/sitemap.xml.js`
-3. Add navigation link in `src/components/sections/header.js`
-
-### Custom Icon Style
-
-Edit `scripts/generate-icons.js` to customize:
-
-- Background color (line 30)
-- Text color (line 42)
-- Font sizes (lines 38-39)
-- Font weights (lines 48, 57)
-
----
-
-## 📊 SEO Optimization
-
-### Automatic SEO Features
-
-- ✅ Dynamic sitemap.xml with all content
-- ✅ Dynamic robots.txt
-- ✅ Meta tags for each page
-- ✅ Open Graph tags for social sharing
-- ✅ Structured data (JSON-LD schema)
-- ✅ Canonical URLs
-- ✅ Image alt texts
-
-### Google Analytics
-
-Configure in `.env.local`:
-
-```env
-NEXT_PUBLIC_GA_TRACKING_ID=your_ga_tracking_id
-```
-
-Analytics is automatically included in production builds.
-
----
-
-## 🚢 Deployment
-
-### Vercel (Recommended)
-
-1. Push your code to GitHub
-2. Import project in Vercel
-3. Configure environment variables
-4. Deploy!
-
-### Other Platforms
-
-Works with any Node.js hosting:
-
-- Netlify
-- AWS Amplify
-- Digital Ocean App Platform
-- Heroku
-- Your own VPS
+Works with other Node.js hosts as well.
 
 Build command: `npm run build`  
 Start command: `npm run start`
 
 ---
 
-## 🔒 Environment Variables
+## 🔒 Environment Variables (Required)
 
-### Required
-
-```env
-MONGODB_URI=mongodb+srv://user:pass@cluster.mongodb.net/dbname
-NEXTAUTH_URL=https://yoursite.com
-NEXTAUTH_SECRET=random_secret_key
-```
-
-### Optional
+Set the minimal required variables to connect this frontend to a backend (e.g. Backsuit).
 
 ```env
-# Backend API
-NEXT_PUBLIC_API_URL=https://api.yoursite.com
-NEXT_PUBLIC_TENANT_ID=your_tenant_id
+# Public backend API base URL (used client-side for OAuth redirects)
+NEXT_PUBLIC_API_URL=https://api.yourbackend.com
 
-# Google Analytics
-NEXT_PUBLIC_GA_TRACKING_ID=UA-XXXXXXXXX-X
+# Tenant identifier (server-side only — do NOT expose with NEXT_PUBLIC_)
+TENANT_ID=your-tenant-id
 
-# OAuth (NextAuth)
-GOOGLE_CLIENT_ID=your_google_client_id
-GOOGLE_CLIENT_SECRET=your_google_client_secret
+# NextAuth secret used to sign/encrypt session tokens
+NEXT_AUTH_SECRET=generate-with-openssl-rand-base64-32
 ```
+
+Quick start: sign up at https://backsuit.com, obtain your API base URL and tenant id, set
+the three variables above, then build & deploy. This connects the UI to the backend and
+lets you demonstrate the full product experience to potential customers.
 
 ---
 
@@ -450,39 +165,35 @@ GOOGLE_CLIENT_SECRET=your_google_client_secret
 
 ## 🤝 Support & Services
 
-### Get Professional Backend API
+### Backend API (Backsuit)
 
-Save months of development time with our production-ready backend service.
+This frontend uses Backsuit (https://backsuit.com) as the primary backend API provider. Backsuit handles storage, multi-tenant features and content APIs — visit and register at Backsuit for a free account and API access.
 
-**Contact us:**
+**Contact & registration:**
 
-- 📧 Email: prettylong@gmail.com
-- 📱 Phone: +905050280533
-- 📍 Location: Bursa, Turkey
+- 📧 Email: bkash.timsina@gmail.com
+- Visit: https://backsuit.com — register for a free account
+- 📱 WhatsApp: +977 9840889975
+- 📍 Location: Nepal, Kathmandu
 
-**Services we offer:**
+**Services / Notes:**
 
-- ✅ Complete backend API setup
-- ✅ Custom feature development
-- ✅ Deployment assistance
-- ✅ Technical support
-- ✅ Training and documentation
-- ✅ Multi-tenant SaaS solutions
+- Backend API, storage and multi-tenant features provided by Backsuit
+- Deployment and support options depend on your Backsuit plan
 
 ### Collaboration
 
-- Found a bug? [Open an issue](https://github.com/bi-kash/PrettyLong/issues)
-- Want a feature? [Request it](https://github.com/bi-kash/PrettyLong/issues)
+- Found a bug? [Open an issue](https://github.com/BackSuit/PetLifeStore/issues)
+- Want a feature? [Request it](https://github.com/BackSuit/PetLifeStore/issues)
 - Want to contribute? Pull requests welcome!
 
 ---
 
 ## 📱 Social Media
 
-- Instagram: [@prettylong](https://instagram.com/prettylong)
-- Twitter: [@prettylong](https://twitter.com/prettylong)
-- Facebook: [Pretty Long](https://facebook.com/prettylong)
-- Email: prettylong@gmail.com
+- Instagram: [@store.petlife](https://instagram.com/store.petlife)
+- Facebook: [Pet Life Store](https://facebook.com/profile.php?id=61580847855988)
+- Email: bkash.timsina@gmail.com
 
 ---
 
@@ -498,12 +209,12 @@ Built with:
 
 - [Next.js](https://nextjs.org/) - React framework
 - [Chakra UI](https://chakra-ui.com/) - Component library
-- [MongoDB](https://www.mongodb.com/) - Database
+- Backend services provided by [Backsuit](https://backsuit.com)
 - [Next-Auth](https://next-auth.js.org/) - Authentication
 - [Sharp](https://sharp.pixelplumbing.com/) - Image processing
 
 ---
 
-**Made with ❤️ by the Pretty Long team**
+**Made with ❤️ by the Pet Life Store team**
 
-_Transform your digital magazine today!_
+_Transform your pet shopping experience today!_

@@ -23,20 +23,18 @@ export default function OAuthCallback() {
         console.log("[OAuth Callback] Token length:", access_token.length)
 
         try {
-          // Get user info from backend
-          const API_URL =
-            process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000"
-          const userInfoUrl = `${API_URL}/api/v1/auth/me`
+          // Fetch user info through the server-side proxy so that TENANT_ID
+          // is never exposed to the browser bundle.
+          const userInfoUrl = `/api/auth/me?token=${encodeURIComponent(
+            access_token
+          )}`
 
-          console.log("[OAuth Callback] Fetching user info from:", userInfoUrl)
+          console.log(
+            "[OAuth Callback] Fetching user info via proxy:",
+            userInfoUrl
+          )
 
-          const response = await fetch(userInfoUrl, {
-            headers: {
-              Authorization: `Bearer ${access_token}`,
-              "Content-Type": "application/json",
-              "X-Tenant-ID": process.env.NEXT_PUBLIC_TENANT_ID || "1",
-            },
-          })
+          const response = await fetch(userInfoUrl)
 
           console.log(
             "[OAuth Callback] User info response status:",
