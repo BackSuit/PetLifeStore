@@ -7,9 +7,6 @@ const withPWA = require("next-pwa")({
 
 const nextConfig = {
   images: {
-    // If NEXT_IMAGE_UNOPTIMIZED=true, Next's image optimizer will be disabled.
-    // This helps avoid runtime ETIMEDOUT when remote image hosts are unreachable
-    // (useful for local development or flaky remote APIs).
     unoptimized:
       process.env.NEXT_IMAGE_UNOPTIMIZED === "true" ||
       process.env.NODE_ENV === "development",
@@ -23,17 +20,17 @@ const nextConfig = {
         hostname: "**",
       },
     ],
-    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
+    // Removed 4K/rare sizes to prevent "Transformation Spikes"
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     formats: ["image/webp"],
-    minimumCacheTTL: 60,
+    // Set to 1 year (31,536,000 seconds) to save your quota
+    minimumCacheTTL: 31536000, 
     dangerouslyAllowSVG: true,
-    contentDispositionType: "attachment",
+    // Changed to "inline" so images open in the browser instead of downloading
+    contentDispositionType: "inline",
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
-  // Turbopack is enabled by default in Next.js 16+. Provide an empty
-  // turbopack config so builds that add a webpack config (via plugins)
-  // don't error when Turbopack is the default bundler.
   turbopack: {},
 }
 

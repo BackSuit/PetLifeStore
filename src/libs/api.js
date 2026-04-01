@@ -61,7 +61,7 @@ export async function fetchAPI(path, options = {}) {
 function normalizeArticle(article) {
   return {
     ...article,
-    image_url: article.image || article.image_url,
+    image_url: article.image || article.image_url || null,
     category:
       typeof article.category === "string"
         ? {
